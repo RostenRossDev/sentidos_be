@@ -68,7 +68,10 @@ public class PostController {
 	@GetMapping("tables")
 	public ResponseEntity<HashMap<String, Object>> allTables(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
+		List<PostDto> postDtos = new ArrayList<PostDto>();
+		postService.findAll().stream().forEach(post -> {
+			postDtos.add(PostWraper.entityToDto(post));
+		});
 		
 		List<UserDto> userDtos = new ArrayList<UserDto>();
 		userService.findAll().stream().forEach(post ->{
