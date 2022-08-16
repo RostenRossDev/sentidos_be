@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +46,10 @@ public class PostController {
 	@GetMapping(value= "",  produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<HashMap<String, Object>> allPost(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
+		List<PostDto> postDtos =new ArrayList<PostDto>();
+		postService.findAll().stream().forEach(post ->{
+			postDtos.add(PostWraper.entityToDto(post));
+		});;
 		response.put("posts", postDtos);
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
@@ -66,9 +70,15 @@ public class PostController {
 		HashMap<String, Object> response = new HashMap<>();
 		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
 		
-		List<UserDto> userDtos = userService.findAll().stream().map(post -> UserWrapper.entityToDto(post)).toList();
+		List<UserDto> userDtos = new ArrayList<UserDto>();
+		userService.findAll().stream().forEach(post ->{
+			userDtos.add(UserWrapper.entityToDto(post));
+		});
 		
-		List<CustomerDto> custoemrDtos = costumerService.findAll().stream().map(post -> CustomerWrapper.entityToDto(post)).toList();
+		List<CustomerDto> custoemrDtos = new ArrayList<CustomerDto>();
+		costumerService.findAll().stream().forEach(post -> {
+			custoemrDtos.add(CustomerWrapper.entityToDto(post));
+		});
 
 		response.put("posts", postDtos);
 		response.put("userDtos", userDtos);
