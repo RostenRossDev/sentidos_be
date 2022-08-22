@@ -64,7 +64,8 @@ public class PostController {
 	@GetMapping(value= "",  produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<HashMap<String, Object>> allPost(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
+		List<PostDto> postDtos =new ArrayList<>();
+		postService.findAll().forEach(post -> postDtos.add(PostWraper.entityToDto(post)));
 		response.put("posts", postDtos);
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
@@ -85,7 +86,8 @@ public class PostController {
 	@GetMapping("tables")
 	public ResponseEntity<HashMap<String, Object>> allTables(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
+		List<PostDto> postDtos =new ArrayList<>();
+		postService.findAll().forEach(post -> postDtos.add(PostWraper.entityToDto(post)));
 		
 		List<UserDto> userDtos = new ArrayList<>();
 		userService.findAll().forEach(post -> userDtos.add(UserWrapper.entityToDto(post)));
