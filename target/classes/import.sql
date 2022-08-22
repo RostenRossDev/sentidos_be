@@ -7,12 +7,12 @@ INSERT INTO `users` (username, password, enabled) VALUES ('NestorCos', '$2a$10$k
 INSERT INTO `users` (username, password, enabled) VALUES ('PiliBe', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
 
 /*create customers*/
-INSERT INTO `customers` (user_id, name, lastname, create_at) VALUES (1,'Rosten', 'Ross', '2017-08-01');
-INSERT INTO `customers` (user_id, name, lastname,create_at) VALUES (2,'Rosten', 'Ross', '2017-08-01');
-INSERT INTO `customers` (user_id, name, lastname,create_at) VALUES (3,'Elias','Pascuet', '2017-08-01');
-INSERT INTO `customers` (user_id, name, lastname,create_at) VALUES (4,'Maria Cristina','Roma', '2017-08-01');
-INSERT INTO `customers` (user_id, name, lastname,create_at) VALUES (5,'Nestor Matias','Costantini', '2017-08-01');
-INSERT INTO `customers` (user_id, name, lastname,create_at) VALUES (6,'Pilar','Benitez', '2017-08-01');
+INSERT INTO `customers` (user_id, name, lastname, create_at, email) VALUES (1,'Rosten', 'Ross', '2017-08-01','rosten_ross@gmail.com');
+INSERT INTO `customers` (user_id, name, lastname,create_at, email) VALUES (2,'Rosten', 'Ross', '2017-08-01','rosten_ross@gmail.com');
+INSERT INTO `customers` (user_id, name, lastname,create_at, email) VALUES (3,'Elias','Pascuet', '2017-08-01','elias_pascuet@gmail.com');
+INSERT INTO `customers` (user_id, name, lastname,create_at, email) VALUES (4,'Maria Cristina','Roma', '2017-08-01','marica_roma@gmail.com');
+INSERT INTO `customers` (user_id, name, lastname,create_at, email) VALUES (5,'Nestor Matias','Costantini', '2017-08-01','nestor_costantini@gmail.com');
+INSERT INTO `customers` (user_id, name, lastname,create_at, email) VALUES (6,'Pilar','Benitez', '2017-08-01','pilar_benitez@gmail.com');
 
 /*create roles*/
 INSERT INTO `roles` (name) VALUES ('ROLE_USER');
