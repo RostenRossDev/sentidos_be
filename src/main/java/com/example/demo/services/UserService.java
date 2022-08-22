@@ -18,6 +18,7 @@ import com.example.demo.dao.IUserDao;
 import com.example.demo.entities.User;
 
 
+
 @Service
 public class UserService implements UserDetailsService, IUsuarioService{
 
@@ -58,4 +59,6 @@ public class UserService implements UserDetailsService, IUsuarioService{
 	public List<User>findAll(){
 		return (List<User>)userDao.findAll();
 	}
+	
+	
 }

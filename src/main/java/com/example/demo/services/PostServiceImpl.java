@@ -33,4 +33,6 @@ public class PostServiceImpl implements IPostService{
 		postDao.deleteById(id);
 	}
 
+	
+	
 }

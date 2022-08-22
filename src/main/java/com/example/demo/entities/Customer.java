@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -76,6 +77,7 @@ public class Customer implements Serializable{
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createAt;
 	
+	private String potho;
 	
 	@PrePersist
     public void prePersist() {
@@ -192,5 +194,12 @@ public class Customer implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPotho() {
+		return potho;
+	}
+	public void setPotho(String potho) {
+		this.potho = potho;
 	}			
+	
 }
