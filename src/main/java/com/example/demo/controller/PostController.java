@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,12 +38,12 @@ import com.example.demo.wrapper.CustomerWrapper;
 import com.example.demo.wrapper.PostWraper;
 import com.example.demo.wrapper.UserWrapper;
 
-
 //@CrossOrigin({"https://cyan-doors-clap-190-183-177-173.loca.lt"})
 @RestController
 @RequestMapping("/api/v1/post/")
 public class PostController {
 
+	private static Logger log = LoggerFactory.getLogger(PostController.class);
 
 	@Autowired
 	private UserService userService;
@@ -51,6 +53,9 @@ public class PostController {
 	
 	@Autowired
 	private PostServiceImpl postService;
+	
+	@Autowired
+	private CostumerServiceImpl customerService;
 	
 	private Object getPrincipal() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -64,8 +69,11 @@ public class PostController {
 	@GetMapping(value= "",  produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<HashMap<String, Object>> allPost(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos =new ArrayList<>();
-		postService.findAll().forEach(post -> postDtos.add(PostWraper.entityToDto(post)));
+		List<PostDto> postDtos = postService.findAll().stream().map(post ->{ 
+			log.info(post.toString());
+			return PostWraper.entityToDto(post);
+		}).toList();
+		log.info(postDtos.toString());
 		response.put("posts", postDtos);
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
@@ -86,14 +94,11 @@ public class PostController {
 	@GetMapping("tables")
 	public ResponseEntity<HashMap<String, Object>> allTables(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos =new ArrayList<>();
-		postService.findAll().forEach(post -> postDtos.add(PostWraper.entityToDto(post)));
+		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
 		
-		List<UserDto> userDtos = new ArrayList<>();
-		userService.findAll().forEach(post -> userDtos.add(UserWrapper.entityToDto(post)));
+		List<UserDto> userDtos = userService.findAll().stream().map(post -> UserWrapper.entityToDto(post)).toList();
 		
-		List<CustomerDto> custoemrDtos = new ArrayList<>();
-		costumerService.findAll().forEach(post ->custoemrDtos.add( CustomerWrapper.entityToDto(post)));
+		List<CustomerDto> custoemrDtos = costumerService.findAll().stream().map(post -> CustomerWrapper.entityToDto(post)).toList();
 
 		response.put("posts", postDtos);
 		response.put("userDtos", userDtos);
@@ -106,18 +111,22 @@ public class PostController {
 	ResponseEntity<HashMap<String, Object>> save(@RequestBody PostDto postDto){
 		HashMap<String, Object> response = new HashMap<>();
 		HttpStatus status=HttpStatus.OK;
-		User userDetails = null;
-
-		if (getPrincipal() instanceof UserDetails) {
-			  userDetails = (User) getPrincipal();
-		}
+		
+		User user = userService.findByUsername(postDto.getUser());
+		Customer customer = customerService.findByUser(user);
+		
 		Post newPost= PostWraper.dtoToEntity(postDto);
-		Customer customer=costumerService.findById(userDetails.getId());
 		newPost.setCustomer(customer);
 		newPost=postService.save(newPost);
-		if(newPost.getId()==null) {
+		log.info(newPost.toString());
+		
+		if(newPost.getId() !=null) {
+			log.info("if: "+newPost.getId().toString());
+
 			response.put("post", newPost);
 		}else {
+			log.info("else: "+newPost.getId().toString());
+
 			response.put("error", "error al comentar");
 			status=HttpStatus.INTERNAL_SERVER_ERROR;
 		}

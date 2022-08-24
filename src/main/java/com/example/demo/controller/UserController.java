@@ -40,7 +40,6 @@ import com.example.demo.services.CostumerServiceImpl;
 import com.example.demo.services.UserService;
 import com.example.demo.wrapper.UserWrapper;
 
-
 //@CrossOrigin({"https://cyan-doors-clap-190-183-177-173.loca.lt"})
 @RestController
 @RequestMapping("/api/v1/user/")
