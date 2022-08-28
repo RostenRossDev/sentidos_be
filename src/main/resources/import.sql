@@ -42,3 +42,21 @@ INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Las bebidas muy s
 INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('No hay mejor lugar', '2017-08-01',1);
 
 
+
+
+
+
+/*INSER RESERVATIONS*/
+
+
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-5');
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-6');
+
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (2, 2, CURRENT_TIMESTAMP, '2022-09-5');
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (1, 2, CURRENT_TIMESTAMP, '2022-09-1');
+
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (6, 3, CURRENT_TIMESTAMP, '2022-09-5');
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (5, 3, CURRENT_TIMESTAMP, '2022-09-5');
+
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (5, 4, CURRENT_TIMESTAMP, '2022-08-29');
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date ) VALUES (6, 4, CURRENT_TIMESTAMP, '2022-08-29');

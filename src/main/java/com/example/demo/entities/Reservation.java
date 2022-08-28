@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"reservation_date", "restaurantTable_id"})})
+@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"reservation_date", "restaurant_table_id"})})
 public class Reservation  implements Serializable{
 	
 	/**
@@ -37,7 +37,7 @@ public class Reservation  implements Serializable{
 	
 	@JsonIgnore
 	@ManyToOne()
-    @JoinColumn(name = "restaurantTable_id")
+    @JoinColumn(name = "restaurant_table_id")
 	private RestaurantTable restaurantTable;
 
 	@ManyToOne()
@@ -54,7 +54,7 @@ public class Reservation  implements Serializable{
     @Temporal(TemporalType.DATE)
 	private Date reservationDate;
 	
-	private Boolean confirmed;
+	private Boolean confirmed=false;
 	
 	@PrePersist
     public void prePersist() {
