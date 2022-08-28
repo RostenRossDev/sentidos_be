@@ -94,12 +94,27 @@ public class PostController {
 	@GetMapping("tables")
 	public ResponseEntity<HashMap<String, Object>> allTables(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
 		
-		List<UserDto> userDtos = userService.findAll().stream().map(post -> UserWrapper.entityToDto(post)).toList();
+		List<PostDto> postDtos = new ArrayList<>();
+		postService.findAll().forEach(el ->{
+			PostDto postDto= PostWraper.entityToDto(el);
+			postDtos.add(postDto);
+		});
 		
-		List<CustomerDto> custoemrDtos = costumerService.findAll().stream().map(post -> CustomerWrapper.entityToDto(post)).toList();
+		List<UserDto> userDtos = new ArrayList<>();
+		
+		userService.findAll().forEach(el ->{
+			UserDto userDto= UserWrapper.entityToDto(el);
+			userDtos.add(userDto);
+		});
+		
+		List<CustomerDto> custoemrDtos = new ArrayList<>();
 
+		costumerService.findAll().forEach(el ->{
+			CustomerDto custoemrDto= CustomerWrapper.entityToDto(el);
+			custoemrDtos.add(custoemrDto);
+		});
+		
 		response.put("posts", postDtos);
 		response.put("userDtos", userDtos);
 		response.put("custoemrDtos", custoemrDtos);
