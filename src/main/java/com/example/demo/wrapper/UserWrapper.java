@@ -1,5 +1,10 @@
 package com.example.demo.wrapper;
 
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.demo.auth.SpringSecurityConfig;
+
 import com.example.demo.dto.UserDto;
 import com.example.demo.entities.User;
 
