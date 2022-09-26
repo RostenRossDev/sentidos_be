@@ -4,10 +4,12 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.entities.User;
 
 public class UserWrapper {
+	public static BCryptPasswordEncoder passwordEncoder = SpringSecurityConfig.passwordEncoder();
+
 	public static User dtoToEntity(UserDto userDto) {
 		User user = new User();
 		user.setUsername(userDto.getUsername());
-		user.setPassword(userDto.getPassword());
+		user.setPassword(passwordEncoder.encode( userDto.getPassword()));
 		user.setEnabled(Boolean.TRUE);
 		return user;
 	}
